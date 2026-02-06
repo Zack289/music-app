@@ -14,8 +14,8 @@ const Discover = () => {
   if (isFetching) return <Loader title="Loading Songs..." />;
   if (error) return <Error />;
 
-  console.log(data);
-  console.log("API data:", JSON.stringify(data, null, 2));
+  // console.log(data);
+  // console.log("API data:", JSON.stringify(data, null, 2));
 
 
   // Extract tracks safely
@@ -42,7 +42,7 @@ const Discover = () => {
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
         {data?.data?.map((song, i) => (
           <SongCard
-            key={song.key || `${song.title}-${song.subtitle}-${i}`}
+           key={song.id}
             song={song}
             i={i}
             isPlaying={isPlaying}
