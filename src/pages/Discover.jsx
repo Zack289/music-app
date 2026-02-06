@@ -10,6 +10,7 @@ const Discover = () => {
   if (error) return <Error />;
 
   console.log(data);
+  console.log("API data:", JSON.stringify(data, null, 2));
 
 
   // Extract tracks safely
@@ -35,7 +36,11 @@ const Discover = () => {
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
         {data?.data?.map((song, i) => (
-          <SongCard key={song.key} song={song} i={i} />
+          <SongCard
+            key={song.key || `${song.title}-${song.subtitle}-${i}`}
+            song={song}
+            i={i}
+          />
         ))}
       </div>
     </div>

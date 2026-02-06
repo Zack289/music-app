@@ -24,6 +24,16 @@ function SongCard({ song, i }) {
           className="w-full h-full rounded-lg"
         />
       </div>
+
+      <div className="mt-4 flex flex-col">
+          <p className="font-semibold text-lg text-white truncate">
+            <Link to={`/songs/${song.id}`}>{song.attributes.name}</Link>
+          </p>
+          <p className="text-sm truncate text-gray-300 mt-1">
+           {/* Apple Music API only has artistName */}
+          <Link to={`/artists/${encodeURIComponent(song.attributes.artistName)}`}>{song.attributes.artistName}</Link>
+          </p>
+      </div>
     </div>
   );
 }
