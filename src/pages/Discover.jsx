@@ -15,7 +15,7 @@ const Discover = () => {
   if (error) return <Error />;
 
   // console.log(data);
-  // console.log("API data:", JSON.stringify(data, null, 2));
+  console.log("API data:", JSON.stringify(data, null, 2));
 
 
   // Extract tracks safely
