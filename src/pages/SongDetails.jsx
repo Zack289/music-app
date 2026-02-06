@@ -15,13 +15,16 @@ function SongDetails() {
   const { activeSong, isPlaying } = useSelector((state) => state.player);
 
   const {
-    data: songData,
-    isFetching: isFetchingSongDetails,
+    data,
+    isFetching: isFetchinRelatedSongs,
     error,
-  } = useGetSongDetailsQuery({ songid });
+  } = useGetSongRelatedQuery({ songid });
 
-  if (isFetchingSongDetails) return <Loader title="Searching song details" />;
+  const { data: songData, isFetching: isFetchingSongDetails } =
+    useGetSongDetailsQuery({ songid });
 
+   if (isFetchingSongDetails && isFetchinRelatedSongs) return <Loader title="Searching song details" />;
+   
   const hasLyrics = songData?.data[0]?.attributes?.hasLyrics;
   console.log(hasLyrics);
 
@@ -37,10 +40,12 @@ function SongDetails() {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   };
-const lyrics = songData?.sections?.find((section) => section.type === "LYRICS")?.text;
+  const lyrics = songData?.sections?.find(
+    (section) => section.type === "LYRICS",
+  )?.text;
   return (
     <div className="flex flex-col">
-      {/* <DetailsHeader artistId={artistId} songData={songData}/> */}
+      <DetailsHeader artistId={artistId} songData={songData} />
 
       <div className="mb-10">
         <h2 className="text-white text-3xl font-bold">Lyrics: </h2>
@@ -57,6 +62,15 @@ const lyrics = songData?.sections?.find((section) => section.type === "LYRICS")?
           )}
         </div>
       </div>
+
+      <RelatedSongs
+        data={data}
+        artistId={artistId}
+        isPlaying={isPlaying}
+        activeSong={activeSong}
+        handlePauseClick={handlePauseClick}
+        handlePlayClick={handlePlayClick}
+      />
     </div>
   );
 }

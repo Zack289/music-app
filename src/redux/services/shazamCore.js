@@ -5,7 +5,7 @@ export const shazamCoreApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://shazam-core.p.rapidapi.com/v1',
     prepareHeaders: (headers) => {
-      headers.set('X-RapidAPI-Key', '1e2183a68cmsh3ab5c03dd0a9481p16079cjsnf1d1580b2e8b');
+      // headers.set('X-RapidAPI-Key', '1e2183a68cmsh3ab5c03dd0a9481p16079cjsnf1d1580b2e8b');
        headers.set(
         'X-RapidAPI-Host',
         'shazam-core.p.rapidapi.com'
@@ -21,7 +21,7 @@ export const shazamCoreApi = createApi({
     // getSongsBySearch: builder.query({ query: (searchTerm) => `v1/search/multi?search_type=SONGS_ARTISTS&query=${searchTerm}` }),
     // getArtistDetails: builder.query({ query: (artistId) => `v2/artists/details?artist_id=${artistId}` }),
     getSongDetails: builder.query({ query: ({ songid }) => `/tracks/details?track_id=${songid}` }),
-    // getSongRelated: builder.query({ query: ({ songid }) => `v1/tracks/related?track_id=${songid}` }),
+    getSongRelated: builder.query({ query: ({ songid }) => `/tracks/related?track_id=${songid}` }),
   }),
 });
 
