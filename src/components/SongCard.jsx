@@ -5,17 +5,25 @@ import { useDispatch } from "react-redux";
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
 
-function SongCard({ song, i }) {
-  const activeSong = { title: "" }; // placeholder, removes VS Code error
-  // console.log(song.images?.coverart)
+function SongCard({ song, i, activeSong, isPlaying, data }) {
+ 
+  const handlePauseClick =()=>{};
+
+  const handlePlayClick = ()=>{}
   return (
     <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
       <div className="relative w-full h-56 group">
         <div
           className={`absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 
-            ${activeSong?.title === song.title ? "flex bg-opacity-70" : "hidden group-hover:flex"}`}
+           ${activeSong?.title === song.attributes.name ? "flex bg-opacity-70" : "hidden group-hover:flex"}`}
         >
-          <PlayPause />
+          <PlayPause 
+          isPlaying={isPlaying}
+          activeSong={activeSong}
+          song={song}
+          handlePause={handlePauseClick}
+          handlePlay={handlePlayClick}
+          />
         </div>
 
         <img
